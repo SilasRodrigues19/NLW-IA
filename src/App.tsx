@@ -11,9 +11,33 @@ import {
   SelectValue,
   Slider,
   VideoInputForm,
-} from './components/ui';
+  PromptSelect,
+} from './components';
+import { useState } from 'react';
+import { useCompletion } from 'ai/react';
 
 export const App = () => {
+
+  const [temperature, setTemperature] = useState(0.5);
+  const [videoId, setVideoId] = useState<string | null >(null);
+
+  const {
+    input,
+    setInput,
+    handleInputChange,
+    handleSubmit,
+    completion,
+    isLoading
+  } = useCompletion({
+    api: 'http://localhost:3333/ai/complete',
+    body: {
+      videoId,
+      temperature,
+    },
+    headers: {
+      'Content-type': 'application/json',
+    },
+  })
 
   return (
     <div className='min-h-screen flex flex-col'>
@@ -39,11 +63,14 @@ export const App = () => {
             <Textarea
               className='resize-none p-4 leading-relaxed'
               placeholder='Inclua o prompt para a IA...'
+              value={input}
+              onChange={handleInputChange}
             />
             <Textarea
               className='resize-none p-4 leading-relaxed'
               placeholder='Resultado gerado pela IA...'
               readOnly
+              value={completion}
             />
           </div>
 
@@ -56,23 +83,14 @@ export const App = () => {
         </section>
 
         <aside className='w-80 space-y-6'>
-          
-          <VideoInputForm />
+          <VideoInputForm onVideoUploaded={setVideoId} />
 
           <Separator />
 
-          <form className='space-y-6'>
+          <form onSubmit={handleSubmit} className='space-y-6'>
             <div className='space-y-2'>
               <Label>Prompt</Label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder='Selecione um Prompt' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value='ytb-title'>Título do YouTube</SelectItem>
-                  <SelectItem value='ytb-desc'>Descrição do YouTube</SelectItem>
-                </SelectContent>
-              </Select>
+              <PromptSelect onPromptSelected={setInput} />
             </div>
 
             <div className='space-y-2'>
@@ -95,7 +113,18 @@ export const App = () => {
             <div className='space-y-4'>
               <Label>Temperatura</Label>
 
-              <Slider className='cursor-pointer' min={0} max={1} step={0.1} />
+              <Slider
+                className='cursor-pointer'
+                min={0}
+                max={1}
+                step={0.1}
+                value={[temperature]}
+                onValueChange={(value) => setTemperature(value[0])}
+              />
+
+              <span className='block text-sm text-muted-foreground italic leading-relaxed'>
+                {temperature.toFixed(1)}{' '}
+              </span>
 
               <span className='block text-sm text-muted-foreground italic leading-relaxed'>
                 Valores mais altos tendem a deixar o resultado mais criativo e
@@ -105,7 +134,7 @@ export const App = () => {
 
             <Separator />
 
-            <Button type='submit' className='w-full'>
+            <Button disabled={isLoading} type='submit' className='w-full disabled:cursor-not-allowed'>
               Executar
               <Sparkles className='w-4 h-4 ml-2' />
             </Button>

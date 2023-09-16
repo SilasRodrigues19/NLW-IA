@@ -1,43 +1,57 @@
 import { Upload, Youtube } from "lucide-react";
-import { Button, Label, Separator, Textarea } from "./ui";
+import { Button, Label, Separator, Textarea } from "../components";
 import { ChangeEvent, FormEvent, useMemo, useRef, useState } from "react";
 import { getFFmpeg } from "@/lib/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
+import { api } from "@/lib/axios";
 
-export const VideoInputForm = () => {
+type Status = 'waiting' | 'converting' | 'uploading' | 'generating' | 'finished';
 
+const statusMessage = {
+  converting: 'Convertendo...',
+  uploading: 'Enviando...',
+  generating: 'Transcrevendo...',
+  finished: 'Finalizado!',
+}
+
+interface VideoInputFormProps {
+  onVideoUploaded: (id: string) => void;
+}
+
+export const VideoInputForm = (props: VideoInputFormProps) => {
   const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [status, setStatus] = useState<Status>('waiting');
   const promptInputRef = useRef<HTMLTextAreaElement>(null);
 
   const handleFileSelected = (e: ChangeEvent<HTMLInputElement>) => {
-      const { files } = e.currentTarget;
+    const { files } = e.currentTarget;
 
-      if(!files) {
-        return;
-      }
+    if (!files) {
+      return;
+    }
 
-      const selectedFile = files[0];
+    const selectedFile = files[0];
 
-      setVideoFile(selectedFile);
-
-  }
+    setVideoFile(selectedFile);
+    setStatus('waiting');
+  };
 
   const convertVideoToAudio = async (video: File) => {
-    console.log('Converted started.')
+    console.log('Converted started.');
 
     const ffmpeg = await getFFmpeg();
 
-    await ffmpeg?.writeFile('input.mp4', await fetchFile(video));
+    await ffmpeg.writeFile('input.mp4', await fetchFile(video));
 
-    /* ffmpeg?.on('log', log => {
+    /* ffmpeg.on('log', log => {
       console.error(log);
     }) */
 
-    ffmpeg?.on('progress', progress => {
+    ffmpeg.on('progress', (progress) => {
       console.log(`Convert progress ${Math.round(progress.progress * 100)}`);
     });
 
-    await ffmpeg?.exec([
+    await ffmpeg.exec([
       '-i',
       'input.mp4',
       '-map',
@@ -46,46 +60,61 @@ export const VideoInputForm = () => {
       '20k',
       '-acodec',
       'libmp3lame',
-      'output.mp3'
+      'output.mp3',
     ]);
-    
-    const data = await ffmpeg?.readFile('output.mp3');
 
-    const audioFileBlob = new Blob([data!], { type: 'audio/mp3' });
-    const audioFile = new File([audioFileBlob], 'audio.mp3', { 
-      type: 'audio/mpeg' 
+    const data = await ffmpeg.readFile('output.mp3');
+
+    const audioFileBlob = new Blob([data], { type: 'audio/mp3' });
+    const audioFile = new File([audioFileBlob], 'audio.mp3', {
+      type: 'audio/mpeg',
     });
-  
+
     console.log('Converted finished.');
 
     return audioFile;
-  
-  }
+  };
 
   const handleUploadVideo = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const prompt = promptInputRef.current?.value;
 
-    if(!videoFile) {
+    if (!videoFile) {
       return;
     }
 
-    // convert mp4 to mp3
+    setStatus('converting');
+
     const audioFile = await convertVideoToAudio(videoFile);
 
-    console.log(audioFile, prompt);
+    const data = new FormData();
 
+    data.append('file', audioFile);
+
+    setStatus('uploading');
+
+    const response = await api.post('/videos', data);
+
+    const videoId = response.data.video.id;
+
+    setStatus('generating');
+
+    await api.post(`/videos/${videoId}/transcription`, {
+      prompt,
+    });
+
+    setStatus('finished');
+
+    props.onVideoUploaded(videoId);
   };
 
   const previewUrl = useMemo(() => {
-
-    if(!videoFile) {
+    if (!videoFile) {
       return null;
     }
 
     return URL.createObjectURL(videoFile);
-
   }, [videoFile]);
 
   return (
@@ -121,16 +150,28 @@ export const VideoInputForm = () => {
         <Label htmlFor='transcription_prompt'>Prompt de transcrição</Label>
         <Textarea
           ref={promptInputRef}
+          disabled={status !== 'waiting'}
           id='transcription_prompt'
-          className='h-20 leading-relaxed resize-none'
+          className='h-20 leading-relaxed resize-none disabled:cursor-not-allowed'
           placeholder='Inclua palavras-chave mencionadas no vídeo separadas por vírgula'
         />
       </div>
 
-      <Button type='submit' className='w-full'>
-        Carregar vídeo
-        <Upload className='w-4 h-4 ml-2' />
+      <Button
+        data-finished={status === 'finished'}
+        disabled={status !== 'waiting'}
+        type='submit'
+        className='w-full data-[finished=true]:bg-emerald-400 disabled:cursor-not-allowed'
+      >
+        {status === 'waiting' ? (
+          <>
+            Carregar vídeo
+            <Upload className='w-4 h-4 ml-2' />
+          </>
+        ) : (
+          statusMessage[status]
+        )}
       </Button>
     </form>
   );
-}
+};
