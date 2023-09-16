@@ -1,10 +1,16 @@
-import { Github, FileVideo, Upload, Wand2 } from 'lucide-react';
-import { Button } from "./components/ui/button"
-import { Separator } from './components/ui/separator';
-import { Textarea } from './components/ui/textarea';
-import { Label } from './components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './components/ui/select';
-import { Slider } from './components/ui/slider';
+import { Github, Youtube, Upload, Sparkles } from 'lucide-react';
+import {
+  Button,
+  Separator,
+  Textarea,
+  Label,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Slider
+} from './components/ui';
 
 export const App = () => {
 
@@ -54,7 +60,7 @@ export const App = () => {
               htmlFor='video'
               className='flex items-center justify-center flex-col gap-2 border border-dashed rounded-md aspect-video cursor-pointer text-muted-foreground text-sm hover:bg-primary/5'
             >
-              <FileVideo className='w-4 h-4' />
+              <Youtube className='w-4 h-4' />
               Selecione um vídeo
             </label>
             <input
@@ -131,7 +137,7 @@ export const App = () => {
 
             <Button type='submit' className='w-full'>
               Executar
-              <Wand2 className='w-4 h-4 ml-2' />
+              <Sparkles className='w-4 h-4 ml-2' />
             </Button>
           </form>
         </aside>
