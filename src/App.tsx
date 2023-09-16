@@ -1,4 +1,4 @@
-import { Github, Youtube, Upload, Sparkles } from 'lucide-react';
+import { Github, Sparkles } from 'lucide-react';
 import {
   Button,
   Separator,
@@ -9,7 +9,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Slider
+  Slider,
+  VideoInputForm,
 } from './components/ui';
 
 export const App = () => {
@@ -55,39 +56,8 @@ export const App = () => {
         </section>
 
         <aside className='w-80 space-y-6'>
-          <form className='space-y-6'>
-            <label
-              htmlFor='video'
-              className='flex items-center justify-center flex-col gap-2 border border-dashed rounded-md aspect-video cursor-pointer text-muted-foreground text-sm hover:bg-primary/5'
-            >
-              <Youtube className='w-4 h-4' />
-              Selecione um vídeo
-            </label>
-            <input
-              type='file'
-              id='video'
-              accept='video/mp4'
-              className='sr-only'
-            />
-
-            <Separator />
-
-            <div className='space-y-2'>
-              <Label htmlFor='transcription_prompt'>
-                Prompt de transcrição
-              </Label>
-              <Textarea
-                id='transcription_prompt'
-                className='h-20 leading-relaxed resize-none'
-                placeholder='Inclua palavras-chave mencionadas no vídeo separadas por vírgula'
-              />
-            </div>
-
-            <Button type='submit' className='w-full'>
-              Carregar vídeo
-              <Upload className='w-4 h-4 ml-2' />
-            </Button>
-          </form>
+          
+          <VideoInputForm />
 
           <Separator />
 
