@@ -92,13 +92,13 @@ export const App = () => {
         <section className='flex flex-col flex-1 gap-4'>
           <div className='grid grid-rows-2 gap-4 flex-1'>
             <Textarea
-              className='resize-none p-4 leading-relaxed'
+              className='resize-none p-4 leading-relaxed focus-visible:ring-2 focus-visible:ring-indigo-500'
               placeholder='Inclua o prompt para a IA...'
               value={input}
               onChange={handleInputChange}
             />
             <Textarea
-              className='resize-none p-4 leading-relaxed'
+              className='resize-none p-4 leading-relaxed focus-visible:ring-2 focus-visible:ring-indigo-500'
               placeholder='Resultado gerado pela IA...'
               readOnly
               value={completion}
@@ -127,7 +127,7 @@ export const App = () => {
             <div className='space-y-2'>
               <Label>Modelo</Label>
               <Select disabled defaultValue='gpt3.5'>
-                <SelectTrigger>
+                <SelectTrigger className='focus:ring-2 focus:ring-indigo-500'>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -135,7 +135,7 @@ export const App = () => {
                 </SelectContent>
               </Select>
               <span className='block text-sm text-muted-foreground italic'>
-                Você poderá customizar essa opção em breve
+                Outros modelos disponíveis em breve
               </span>
             </div>
 
@@ -158,8 +158,7 @@ export const App = () => {
               </span>
 
               <span className='block text-sm text-muted-foreground italic leading-relaxed'>
-                Valores mais altos tendem a deixar o resultado mais criativo e
-                com possíveis erros.
+                Valores mais altos aumentam a criatividade de resposta mas são mais suscetíveis a erros.
               </span>
             </div>
 
@@ -168,7 +167,7 @@ export const App = () => {
             <Button
               disabled={isLoading}
               type='submit'
-              className='w-full disabled:cursor-not-allowed'
+              className='w-full bg-indigo-500 disabled:cursor-not-allowed hover:bg-indigo-400 focus-within:ring-2 focus-within:ring-indigo-400'
               onClick={handleClickButton}
             >
               Executar

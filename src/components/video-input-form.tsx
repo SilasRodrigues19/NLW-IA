@@ -164,7 +164,7 @@ export const VideoInputForm = (props: VideoInputFormProps) => {
           ref={promptInputRef}
           disabled={status !== 'waiting'}
           id='transcription_prompt'
-          className='h-20 leading-relaxed resize-none disabled:cursor-not-allowed'
+          className='h-20 leading-relaxed resize-none disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-indigo-500'
           placeholder='Inclua palavras-chave mencionadas no vídeo separadas por vírgula'
         />
       </div>
@@ -173,7 +173,7 @@ export const VideoInputForm = (props: VideoInputFormProps) => {
         data-finished={status === 'finished'}
         disabled={status !== 'waiting'}
         type='submit'
-        className='w-full data-[finished=true]:bg-emerald-400 disabled:cursor-not-allowed'
+        className='w-full bg-indigo-500 data-[finished=true]:bg-emerald-400 disabled:cursor-not-allowed hover:bg-indigo-400 focus-within:ring-2 focus-within:ring-indigo-400'
         onClick={handleClickButton}
       >
         {status === 'waiting' ? (
