@@ -5,6 +5,8 @@ export * from './ui/separator';
 export * from './ui/slider';
 export * from './ui/textarea';
 export * from './ui/alert';
+export * from './ui/sheet';
+export * from './ui/scroll-area';
 export * from './video-input-form';
 export * from './prompt-select';
 export * from './alert-dialog';

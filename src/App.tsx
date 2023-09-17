@@ -17,6 +17,7 @@ import {
 import { useState } from 'react';
 import { useCompletion } from 'ai/react';
 import { useTheme } from './components/theme-provider';
+import { HelpArea } from './components/HelpArea';
 
 export const App = () => {
 
@@ -54,12 +55,12 @@ export const App = () => {
   })
 
   return (
-    <div className='min-h-screen flex flex-col'>
+    <main className='min-h-screen flex flex-col'>
       <div className='px-6 py-3 flex items-center justify-between border-b'>
         <h1 className='text-xl font-bold'>upload.ai</h1>
 
         <div className='flex items-center gap-3'>
-          <span className='text-sm text-muted-foreground'>
+          <span className='text-sm text-muted-foreground hidden lg:block'>
             Desenvolvido por{' '}
             <a
               href='https://silasrodrigues.vercel.app'
@@ -80,6 +81,8 @@ export const App = () => {
 
           <Separator orientation='vertical' className='h-6' />
 
+          <HelpArea />
+
           <Button variant='outline'>
             <Github className='w-4 h-4 mr-2' />
             <a href='https://github.com/SilasRodrigues19' target='_blank'>
@@ -88,7 +91,7 @@ export const App = () => {
           </Button>
         </div>
       </div>
-      <main className='flex-1 p-6 flex gap-6'>
+      <div className='flex-1 p-6 flex gap-6'>
         <section className='flex flex-col flex-1 gap-4'>
           <div className='grid grid-rows-2 gap-4 flex-1'>
             <Textarea
@@ -158,7 +161,8 @@ export const App = () => {
               </span>
 
               <span className='block text-sm text-muted-foreground italic leading-relaxed'>
-                Valores mais altos aumentam a criatividade de resposta mas são mais suscetíveis a erros.
+                Valores mais altos aumentam a criatividade de resposta mas são
+                mais suscetíveis a erros.
               </span>
             </div>
 
@@ -181,7 +185,7 @@ export const App = () => {
             )}
           </form>
         </aside>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
