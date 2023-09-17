@@ -1,4 +1,4 @@
-import { Github, Sparkles } from 'lucide-react';
+import { Github, Sparkles, XCircle, CloudMoon, CloudSun } from 'lucide-react';
 import {
   Button,
   Separator,
@@ -12,14 +12,28 @@ import {
   Slider,
   VideoInputForm,
   PromptSelect,
+  AlertDialog,
 } from './components';
 import { useState } from 'react';
 import { useCompletion } from 'ai/react';
+import { useTheme } from './components/theme-provider';
 
 export const App = () => {
 
   const [temperature, setTemperature] = useState(0.5);
   const [videoId, setVideoId] = useState<string | null >(null);
+   const [uploadButtonClicked, setUploadButtonClicked] = useState(false);
+   const { theme, setTheme } = useTheme();
+
+   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
+
+   const handleClickButton = () => {
+     setUploadButtonClicked(true);
+
+     setTimeout(() => {
+       setUploadButtonClicked(false);
+     }, 5000);
+   };
 
   const {
     input,
@@ -46,14 +60,31 @@ export const App = () => {
 
         <div className='flex items-center gap-3'>
           <span className='text-sm text-muted-foreground'>
-            Desenvolvido com ❤️
+            Desenvolvido por{' '}
+            <a
+              href='https://silasrodrigues.vercel.app'
+              target='_blank'
+              className='leading-relaxed hover:text-foreground'
+            >
+              Silas Rodrigues
+            </a>
           </span>
+
+          <Separator orientation='vertical' className='h-6' />
+
+          <Button onClick={toggleTheme} variant='inherit' size='sm'>
+            <CloudSun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
+            <CloudMoon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
+            <span className='sr-only'>Toggle theme</span>
+          </Button>
 
           <Separator orientation='vertical' className='h-6' />
 
           <Button variant='outline'>
             <Github className='w-4 h-4 mr-2' />
-            GitHub
+            <a href='https://github.com/SilasRodrigues19' target='_blank'>
+              GitHub
+            </a>
           </Button>
         </div>
       </div>
@@ -134,10 +165,21 @@ export const App = () => {
 
             <Separator />
 
-            <Button disabled={isLoading} type='submit' className='w-full disabled:cursor-not-allowed'>
+            <Button
+              disabled={isLoading}
+              type='submit'
+              className='w-full disabled:cursor-not-allowed'
+              onClick={handleClickButton}
+            >
               Executar
               <Sparkles className='w-4 h-4 ml-2' />
             </Button>
+            {uploadButtonClicked && !videoId && (
+              <AlertDialog
+                title='Carregue o vídeo e selecione o Prompt'
+                icon={XCircle}
+              />
+            )}
           </form>
         </aside>
       </main>
