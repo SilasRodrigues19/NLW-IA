@@ -1,5 +1,5 @@
-import { Upload, Youtube } from "lucide-react";
-import { Button, Label, Separator, Textarea } from "../components";
+import { Upload, XCircle, Youtube } from "lucide-react";
+import { AlertDialog, Button, Label, Separator, Textarea } from "../components";
 import { ChangeEvent, FormEvent, useMemo, useRef, useState } from "react";
 import { getFFmpeg } from "@/lib/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
@@ -21,7 +21,16 @@ interface VideoInputFormProps {
 export const VideoInputForm = (props: VideoInputFormProps) => {
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [status, setStatus] = useState<Status>('waiting');
+  const [uploadButtonClicked, setUploadButtonClicked] = useState(false);
   const promptInputRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleClickButton = () => {
+    setUploadButtonClicked(true);
+
+    setTimeout(() => {
+      setUploadButtonClicked(false);
+    }, 5000);
+  };
 
   const handleFileSelected = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.currentTarget;
@@ -136,6 +145,9 @@ export const VideoInputForm = (props: VideoInputFormProps) => {
           </>
         )}
       </label>
+      {uploadButtonClicked && !videoFile && (
+        <AlertDialog title='Escolha um vídeo para continuar' icon={XCircle} />
+      )}
       <input
         type='file'
         id='video'
@@ -162,6 +174,7 @@ export const VideoInputForm = (props: VideoInputFormProps) => {
         disabled={status !== 'waiting'}
         type='submit'
         className='w-full data-[finished=true]:bg-emerald-400 disabled:cursor-not-allowed'
+        onClick={handleClickButton}
       >
         {status === 'waiting' ? (
           <>
