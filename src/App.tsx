@@ -19,6 +19,8 @@ import { useCompletion } from 'ai/react';
 import { useTheme } from './components/theme-provider';
 import { HelpArea } from './components/HelpArea';
 
+const apiURL = import.meta.env.VITE_BACKEND_URL;
+
 export const App = () => {
 
   const [temperature, setTemperature] = useState(0.5);
@@ -42,9 +44,9 @@ export const App = () => {
     handleInputChange,
     handleSubmit,
     completion,
-    isLoading
+    isLoading,
   } = useCompletion({
-    api: 'http://localhost:3333/ai/complete',
+    api: `${apiURL}/ai/complete`,
     body: {
       videoId,
       temperature,
@@ -52,7 +54,7 @@ export const App = () => {
     headers: {
       'Content-type': 'application/json',
     },
-  })
+  });
 
   return (
     <main className='min-h-screen flex flex-col'>
