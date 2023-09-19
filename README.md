@@ -48,10 +48,10 @@
 
 ## About The Project
 
-| Light Desktop                                  | Dark Desktop                                    |
-| ---------------------------------------------- | ----------------------------------------------- |
-| [![Preview][product-screenshot]][project-link] | [![Preview][product-screenshot2]][project-link] |
-| Light Mobile                                   | Dark Mobile                                     |
+| Light Desktop                                   | Dark Desktop                                    |
+| ----------------------------------------------- | ----------------------------------------------- |
+| [![Preview][product-screenshot]][project-link]  | [![Preview][product-screenshot2]][project-link] |
+| Light Mobile                                    | Dark Mobile                                     |
 | [![Preview][product-screenshot3]][project-link] | [![Preview][product-screenshot4]][project-link] |
 
 <hr>
@@ -63,33 +63,36 @@ Project built during NLW AI, consists of an application for transcribing videos.
 Technologies used in the project.
 
 ### Libraries
+
 - [shadcn/ui](https://ui.shadcn.com/)
-Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.
+  Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.
 
 - [Radix UI](https://www.radix-ui.com/)
-An open source component library optimized for fast development, easy maintenance, and accessibility.
+  An open source component library optimized for fast development, easy maintenance, and accessibility.
 
 - [Lucide](https://lucide.dev/)
-Beautiful & consistent icons. Made by the React community.
+  Beautiful & consistent icons. Made by the React community.
 
 ### Frameworks
+
 - [Vite](https://vitejs.dev/)
-Frontend Tooling for build with React.
+  Frontend Tooling for build with React.
 
 - [Tailwind CSS](https://tailwindcss.com)
-Framework for fast and efficient front-end styling.
+  Framework for fast and efficient front-end styling.
 
 ### Technologies
+
 - [TypeScript](https://www.typescriptlang.org/)
-A strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
+  A strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
 
 - [Axios](https://axios-http.com/docs/intro)
-A promise-based HTTP Client for node.js and the browser.
+  A promise-based HTTP Client for node.js and the browser.
 
 ### Tools
-- [@ffmpeg/ffmpeg | @ffmpeg/util](https://ffmpeg.org/)
-A cross-platform to record, convert and stream audio and video.
 
+- [@ffmpeg/ffmpeg | @ffmpeg/util](https://ffmpeg.org/)
+  A cross-platform to record, convert and stream audio and video.
 
 <!-- GETTING STARTED -->
 
@@ -117,7 +120,7 @@ A cross-platform to record, convert and stream audio and video.
      Port: 5173
      Access URL: http://10.0.0.38:5173
    ```
-<!-- CONTRIBUTING -->
+   <!-- CONTRIBUTING -->
 
 ## Contributing
 
