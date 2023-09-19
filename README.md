@@ -63,7 +63,7 @@ Project built during NLW AI, consists of an application for transcribing videos.
 Technologies used in the project.
 
 ### Libraries
-- [shadcdn/ui](https://ui.shadcn.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
 Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.
 
 - [Radix UI](https://www.radix-ui.com/)
@@ -97,7 +97,7 @@ A cross-platform to record, convert and stream audio and video.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/SilasRodrigues19/NLW-IA.GIT
+   git clone https://github.com/SilasRodrigues19/NLW-IA.git
    ```
 2. Install dependencies (you can use npm, pnpm, yarn or anything else)
    ```sh
@@ -111,7 +111,7 @@ A cross-platform to record, convert and stream audio and video.
    ```sh
      http://localhost:5173/
    ```
-5. Para acessar no celular, utilize a mesma rede e substitua `localhost` pelo endereço da máquina. `e.g. http://10.0.0.38:5173`
+5. To access on your smartphone, use the same network and replace `localhost` with the machine address. `e.g. http://10.0.0.38:5173`
    ```
      IPv4 Address: 10.0.0.38
      Port: 5173
