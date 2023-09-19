@@ -61,7 +61,7 @@ export const App = () => {
       <div className='px-6 py-3 flex items-center justify-between border-b'>
         <h1 className='text-xl font-bold'>upload.ai</h1>
 
-        <div className='flex items-center gap-3'>
+        <div className='flex items-center gap-1 md:gap-3'>
           <span className='text-sm text-muted-foreground hidden lg:block'>
             Desenvolvido por{' '}
             <a
@@ -73,7 +73,7 @@ export const App = () => {
             </a>
           </span>
 
-          <Separator orientation='vertical' className='h-6' />
+          <Separator orientation='vertical' className='h-6 hidden lg:block' />
 
           <Button onClick={toggleTheme} variant='inherit' size='sm'>
             <CloudSun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
@@ -93,17 +93,17 @@ export const App = () => {
           </Button>
         </div>
       </div>
-      <div className='flex-1 p-6 flex gap-6'>
+      <div className='flex-1 p-6 flex gap-6 flex-col-reverse items-center sm:items-stretch sm:flex-row'>
         <section className='flex flex-col flex-1 gap-4'>
           <div className='grid grid-rows-2 gap-4 flex-1'>
             <Textarea
-              className='resize-none p-4 leading-relaxed focus-visible:ring-2 focus-visible:ring-indigo-500'
+              className='h-[26rem] resize-none p-4 leading-relaxed focus-visible:ring-2 focus-visible:ring-indigo-500'
               placeholder='Inclua o prompt para a IA...'
               value={input}
               onChange={handleInputChange}
             />
             <Textarea
-              className='resize-none p-4 leading-relaxed focus-visible:ring-2 focus-visible:ring-indigo-500'
+              className='h-[26rem] resize-none p-4 leading-relaxed focus-visible:ring-2 focus-visible:ring-indigo-500'
               placeholder='Resultado gerado pela IA...'
               readOnly
               value={completion}
