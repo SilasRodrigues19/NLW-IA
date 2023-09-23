@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components";
 import { api } from "@/lib/axios";
 
 interface Prompt {
@@ -36,7 +36,7 @@ export const PromptSelect = (props: PromptSelectProps) => {
     <Select onValueChange={handlePromptSelected}>
       <SelectTrigger className='focus:ring-2 focus:ring-indigo-500'>
         <SelectValue
-          placeholder='Selecione um Prompt'
+          placeholder='Select a Prompt'
           
         />
       </SelectTrigger>

@@ -10,3 +10,4 @@ export * from './ui/scroll-area';
 export * from './video-input-form';
 export * from './prompt-select';
 export * from './alert-dialog';
+export * from './HelpArea';

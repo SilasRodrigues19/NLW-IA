@@ -6,6 +6,7 @@ import {
   Video,
   Wand,
 } from 'lucide-react';
+
 import {
   AlertDialog as Content,
   Button,
@@ -19,7 +20,7 @@ import {
   SheetTitle,
   SheetTrigger,
   ScrollArea,
-} from '../components';
+} from '@/components';
 
 export const HelpArea = () => {
   return (
@@ -34,10 +35,10 @@ export const HelpArea = () => {
       <SheetContent className='select-none'>
         <ScrollArea className='h-full w-full rounded-md border border-transparent p-6'>
           <SheetHeader>
-            <SheetTitle>Fluxo de Transcrição</SheetTitle>
+            <SheetTitle>Transcription Flow</SheetTitle>
             <SheetDescription>
-              Nessa sessão explicaremos como funciona o fluxo de transcrição da
-              aplicação.
+              In this session we will explain how the transcription flow of the
+              application.
             </SheetDescription>
           </SheetHeader>
 
@@ -45,31 +46,29 @@ export const HelpArea = () => {
 
           <div className='flex items-center flex-col gap-2 space-y-2'>
             <Content
-              title='Seleção de vídeo'
+              title='Video Selection'
               icon={Video}
               className='bg-blue-500'
             />
             <span className='block text-sm text-muted-foreground italic leading-relaxed'>
-              Escolha o vídeo que deseja obter a transcrição, se tudo ocorrer
-              bem você verá uma pré-visualização em miniatura do vídeo
-              escolhido.
+              Choose the video you want to get the transcript if everything
+              occurs well you will see a thumbnail preview of the video chosen.
             </span>
 
             <Content
-              title='Palavras Chave'
+              title='Keywords'
               icon={TextSelect}
               className='bg-blue-500'
             />
             <span className='block text-sm text-muted-foreground italic leading-relaxed'>
-              Opcionalmente você pode adicionar palavras-chave separadas por
-              vírgula.
+              Optionally you can add keywords separated by comma.
             </span>
 
             <Content title='Prompt' icon={MenuSquare} className='bg-blue-500' />
             <span className='block text-sm text-muted-foreground italic leading-relaxed'>
-              Selecione um Prompt de entrada já existente e ajuste se for
-              necessário, o prompt contém as informações que serão utilizadas
-              para a IA gerar o texto.
+              Select an existing Input Prompt and adjust if necessary. The
+              prompt contains the information that will be used for the AI to
+              generate the text.
             </span>
 
             <Content
@@ -78,23 +77,27 @@ export const HelpArea = () => {
               className='bg-blue-500'
             />
             <span className='block text-sm text-muted-foreground italic leading-relaxed'>
-              Escala de 0.1 à 1.0 que define a "inteligência" da IA, quanto
-              maior a temperatura mais "inteligente" a IA será e também mais
-              suscetível a erros.
+              Scale from 0.1 to 1.0 that defines the "intelligence" of AI, as
+              the higher the temperature the "smarter" the AI will be and also
+              the more susceptible to errors.
             </span>
 
-            <Content title='Executar' icon={Wand} className='bg-blue-500' />
+            <Content title='Execution' icon={Wand} className='bg-blue-500' />
             <span className='block text-sm text-muted-foreground italic leading-relaxed'>
-              Essa etapa junta todas as etapas e faz a chamada para a API. O seu
-              vídeo escolhido será convertido de mp4 para mp3 e a API irá gerar
-              toda transcrição do áudio. Essa transcrição é usada posteriormente
-              no Prompt através da variável{' '}
+              The chosen video will be converted from mp4 to mp3 and the API will
+              generate entire audio transcription. This transcription is used
+              later in the Prompt through the variable{' '}
               <code className='text-violet-400'>{'{transcription}'}</code>.
             </span>
           </div>
           <SheetFooter className='block my-2'>
             <SheetClose asChild>
-              <Button type='submit' className='bg-indigo-500 hover:bg-indigo-400'>Fechar</Button>
+              <Button
+                type='submit'
+                className='bg-indigo-500 hover:bg-indigo-400'
+              >
+                Close
+              </Button>
             </SheetClose>
           </SheetFooter>
         </ScrollArea>

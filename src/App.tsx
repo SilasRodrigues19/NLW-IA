@@ -13,11 +13,11 @@ import {
   VideoInputForm,
   PromptSelect,
   AlertDialog,
-} from './components';
+  HelpArea
+} from '@/components';
 import { useState } from 'react';
 import { useCompletion } from 'ai/react';
 import { useTheme } from './components/theme-provider';
-import { HelpArea } from './components/HelpArea';
 
 const apiURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -63,7 +63,7 @@ export const App = () => {
 
         <div className='flex items-center gap-1 md:gap-3'>
           <span className='text-sm text-muted-foreground hidden lg:block'>
-            Desenvolvido por{' '}
+            Developed by{' '}
             <a
               href='https://silasrodrigues.vercel.app'
               target='_blank'
@@ -98,23 +98,22 @@ export const App = () => {
           <div className='grid grid-rows-2 gap-4 flex-1'>
             <Textarea
               className='h-[26rem] resize-none p-4 leading-relaxed focus-visible:ring-2 focus-visible:ring-indigo-500'
-              placeholder='Inclua o prompt para a IA...'
+              placeholder='Include the prompt for the AI...'
               value={input}
               onChange={handleInputChange}
             />
             <Textarea
               className='h-[26rem] resize-none p-4 leading-relaxed focus-visible:ring-2 focus-visible:ring-indigo-500'
-              placeholder='Resultado gerado pela IA...'
+              placeholder='AI Response...'
               readOnly
               value={completion}
             />
           </div>
 
           <p className='text-sm text-muted-foreground'>
-            Lembre-se: você pode utilizar a variável{' '}
-            <code className='text-violet-400'>{'{transcription}'}</code> no seu
-            prompt para adicionar o conteúdo da transcrição do vídeo
-            selecionado.
+            Remember: you can use the variable{' '}
+            <code className='text-violet-400'>{'{transcription}'}</code> in your
+            prompt to add video transcript content selected.
           </p>
         </section>
 
@@ -130,24 +129,27 @@ export const App = () => {
             </div>
 
             <div className='space-y-2'>
-              <Label>Modelo</Label>
+              <Label>Model</Label>
               <Select disabled defaultValue='gpt3.5'>
                 <SelectTrigger className='focus:ring-2 focus:ring-indigo-500'>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value='gpt3.5'>GPT 3.5-turbo 16k</SelectItem>
+                  <SelectItem disabled value='gpt3.5'>
+                    GPT 4
+                  </SelectItem>
                 </SelectContent>
               </Select>
               <span className='block text-sm text-muted-foreground italic'>
-                Outros modelos disponíveis em breve
+                GPT-4 available soon
               </span>
             </div>
 
             <Separator />
 
             <div className='space-y-4'>
-              <Label>Temperatura</Label>
+              <Label>Temperature</Label>
 
               <Slider
                 className='cursor-pointer'
@@ -159,12 +161,12 @@ export const App = () => {
               />
 
               <span className='block text-sm text-muted-foreground italic leading-relaxed'>
-                {temperature.toFixed(1)}{' '}
+                Current temperature is {temperature.toFixed(1)}{' '}
               </span>
 
               <span className='block text-sm text-muted-foreground italic leading-relaxed'>
-                Valores mais altos aumentam a criatividade de resposta mas são
-                mais suscetíveis a erros.
+                Higher values increase response creativity but are more
+                susceptible to errors.
               </span>
             </div>
 
@@ -176,12 +178,12 @@ export const App = () => {
               className='w-full bg-indigo-500 disabled:cursor-not-allowed hover:bg-indigo-400 focus-within:ring-2 focus-within:ring-indigo-400'
               onClick={handleClickButton}
             >
-              Executar
+              Execute
               <Sparkles className='w-4 h-4 ml-2' />
             </Button>
             {uploadButtonClicked && !videoId && (
               <AlertDialog
-                title='Carregue o vídeo e selecione o Prompt'
+                title='Upload the video and select the Prompt'
                 icon={XCircle}
               />
             )}

@@ -1,5 +1,5 @@
 import { Upload, XCircle, Youtube } from "lucide-react";
-import { AlertDialog, Button, Label, Separator, Textarea } from "../components";
+import { AlertDialog, Button, Label, Separator, Textarea } from "@/components";
 import { ChangeEvent, FormEvent, useMemo, useRef, useState } from "react";
 import { getFFmpeg } from "@/lib/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
@@ -8,10 +8,10 @@ import { api } from "@/lib/axios";
 type Status = 'waiting' | 'converting' | 'uploading' | 'generating' | 'finished';
 
 const statusMessage = {
-  converting: 'Convertendo...',
-  uploading: 'Enviando...',
-  generating: 'Transcrevendo...',
-  finished: 'Finalizado!',
+  converting: 'Convertind...',
+  uploading: 'Uploading...',
+  generating: 'Generating...',
+  finished: 'Done',
 }
 
 interface VideoInputFormProps {
@@ -46,7 +46,7 @@ export const VideoInputForm = (props: VideoInputFormProps) => {
   };
 
   const convertVideoToAudio = async (video: File) => {
-    console.log('Converted started.');
+    console.info('Converted started.');
 
     const ffmpeg = await getFFmpeg();
 
@@ -79,7 +79,7 @@ export const VideoInputForm = (props: VideoInputFormProps) => {
       type: 'audio/mpeg',
     });
 
-    console.log('Converted finished.');
+    console.info('Converted finished.');
 
     return audioFile;
   };
@@ -141,12 +141,12 @@ export const VideoInputForm = (props: VideoInputFormProps) => {
         ) : (
           <>
             <Youtube className='w-4 h-4' />
-            Selecione um vídeo
+            Choose video
           </>
         )}
       </label>
       {uploadButtonClicked && !videoFile && (
-        <AlertDialog title='Escolha um vídeo para continuar' icon={XCircle} />
+        <AlertDialog title='Choose a video to continue' icon={XCircle} />
       )}
       <input
         type='file'
@@ -159,13 +159,13 @@ export const VideoInputForm = (props: VideoInputFormProps) => {
       <Separator />
 
       <div className='space-y-2'>
-        <Label htmlFor='transcription_prompt'>Palavras chave</Label>
+        <Label htmlFor='transcription_prompt'>Keywords</Label>
         <Textarea
           ref={promptInputRef}
           disabled={status !== 'waiting'}
           id='transcription_prompt'
           className='h-20 leading-relaxed resize-none disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-indigo-500'
-          placeholder='Inclua palavras-chave mencionadas no vídeo separadas por vírgula'
+          placeholder='Include keywords mentioned in the video separated by commas'
         />
       </div>
 
@@ -178,7 +178,7 @@ export const VideoInputForm = (props: VideoInputFormProps) => {
       >
         {status === 'waiting' ? (
           <>
-            Carregar vídeo
+            Upload video
             <Upload className='w-4 h-4 ml-2' />
           </>
         ) : (

@@ -1,4 +1,4 @@
-import { Alert, AlertTitle } from "../components";
+import { Alert, AlertTitle } from "@/components";
 
 interface AlertDialogProps {
   icon: React.ElementType;
