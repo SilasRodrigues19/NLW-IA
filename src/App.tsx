@@ -66,7 +66,7 @@ export const App = () => {
             <a
               href='https://silasrodrigues.vercel.app'
               target='_blank'
-              className='leading-relaxed hover:text-foreground'
+              className='leading-relaxed hover:text-foreground focus-visible:text-indigo-500 focus-visible:outline-none focus-visible:underline transition-colors'
             >
               Silas Rodrigues
             </a>
@@ -74,7 +74,12 @@ export const App = () => {
 
           <Separator orientation='vertical' className='h-6 hidden lg:block' />
 
-          <Button onClick={toggleTheme} variant='inherit' size='sm'>
+          <Button
+            onClick={toggleTheme}
+            variant='inherit'
+            size='sm'
+            className='focus-visible:ring-foreground focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent'
+          >
             <CloudSun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
             <CloudMoon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
             <span className='sr-only'>Toggle theme</span>
@@ -140,8 +145,8 @@ export const App = () => {
 
             <div className='space-y-2'>
               <Label>Model</Label>
-              <Select disabled defaultValue='gpt3.5'>
-                <SelectTrigger className='focus:ring-2 focus:ring-indigo-500'>
+              <Select defaultValue='gpt3.5'>
+                <SelectTrigger className='focus:ring-2 focus:ring-indigo-500 focus-visible:ring-indigo-700 focus-visible:ring-2 focus-visible:ring-offset-2'>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -185,7 +190,7 @@ export const App = () => {
             <Button
               disabled={isLoading}
               type='submit'
-              className='w-full bg-indigo-500 disabled:cursor-not-allowed hover:bg-indigo-400 focus-within:ring-2 focus-within:ring-indigo-400'
+              className='w-full bg-indigo-500 disabled:cursor-not-allowed hover:bg-indigo-400 focus-within:ring-2focus-within:ring-indigo-400 focus-visible:ring-indigo-700 focus-visible:ring-2 focus-visible:ring-offset-2'
               onClick={handleClickButton}
             >
               Execute

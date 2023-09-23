@@ -26,7 +26,11 @@ export const HelpArea = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant='inherit' size='sm'>
+        <Button
+          variant='inherit'
+          size='sm'
+          className='focus-visible:ring-foreground focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent'
+        >
           <Info className='h-[1.2rem] w-[1.2rem]' />
           <span className='sr-only'>Help</span>
         </Button>
@@ -84,9 +88,9 @@ export const HelpArea = () => {
 
             <Content title='Execution' icon={Wand} className='bg-blue-500' />
             <span className='block text-sm text-muted-foreground italic leading-relaxed'>
-              The chosen video will be converted from mp4 to mp3 and the API will
-              generate entire audio transcription. This transcription is used
-              later in the Prompt through the variable{' '}
+              The chosen video will be converted from mp4 to mp3 and the API
+              will generate entire audio transcription. This transcription is
+              used later in the Prompt through the variable{' '}
               <code className='text-violet-400'>{'{transcription}'}</code>.
             </span>
           </div>

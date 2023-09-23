@@ -130,7 +130,7 @@ export const VideoInputForm = (props: VideoInputFormProps) => {
     <form onSubmit={handleUploadVideo} className='space-y-6'>
       <label
         htmlFor='video'
-        className='relative flex items-center justify-center flex-col gap-2 border border-dashed rounded-md aspect-video cursor-pointer text-muted-foreground text-sm hover:bg-primary/5'
+        className='relative flex items-center justify-center flex-col gap-2 border border-dashed rounded-md aspect-video cursor-pointer text-muted-foreground text-sm hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-indigo-700 focus-visible:ring-2 focus-visible:ring-offset-2'
       >
         {previewUrl ? (
           <video
@@ -140,7 +140,7 @@ export const VideoInputForm = (props: VideoInputFormProps) => {
           />
         ) : (
           <>
-            <Youtube className='w-4 h-4' />
+            <Youtube className='w-4 h-4 ' />
             Choose video
           </>
         )}
@@ -173,7 +173,7 @@ export const VideoInputForm = (props: VideoInputFormProps) => {
         data-finished={status === 'finished'}
         disabled={status !== 'waiting'}
         type='submit'
-        className='w-full bg-indigo-500 data-[finished=true]:bg-emerald-400 disabled:cursor-not-allowed hover:bg-indigo-400 focus-within:ring-2 focus-within:ring-indigo-400'
+        className='w-full bg-indigo-500 data-[finished=true]:bg-emerald-400 disabled:cursor-not-allowed hover:bg-indigo-400 focus-within:ring-2 focus-within:ring-indigo-400 focus-visible:ring-indigo-700 focus-visible:ring-2 focus-visible:ring-offset-2'
         onClick={handleClickButton}
       >
         {status === 'waiting' ? (

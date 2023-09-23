@@ -34,11 +34,8 @@ export const PromptSelect = (props: PromptSelectProps) => {
 
   return (
     <Select onValueChange={handlePromptSelected}>
-      <SelectTrigger className='focus:ring-2 focus:ring-indigo-500'>
-        <SelectValue
-          placeholder='Select a Prompt'
-          
-        />
+      <SelectTrigger className='focus:ring-2 focus:ring-indigo-500 focus-visible:ring-indigo-700 focus-visible:ring-2 focus-visible:ring-offset-2'>
+        <SelectValue placeholder='Select a Prompt' />
       </SelectTrigger>
       <SelectContent>
         {prompts?.map((prompt) => {
