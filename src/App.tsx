@@ -136,7 +136,7 @@ export const App = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value='gpt3.5'>GPT 3.5-turbo 16k</SelectItem>
-                  <SelectItem disabled value='gpt3.5'>
+                  <SelectItem disabled value='gpt4'>
                     GPT 4
                   </SelectItem>
                 </SelectContent>
