@@ -8,7 +8,7 @@ import { api } from "@/lib/axios";
 type Status = 'waiting' | 'converting' | 'uploading' | 'generating' | 'finished';
 
 const statusMessage = {
-  converting: 'Convertind...',
+  converting: 'Converting...',
   uploading: 'Uploading...',
   generating: 'Generating...',
   finished: 'Done',
