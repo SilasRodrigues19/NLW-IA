@@ -13,7 +13,7 @@ import {
   VideoInputForm,
   PromptSelect,
   AlertDialog,
-  HelpArea
+  HelpArea,
 } from '@/components';
 import { useState } from 'react';
 import { useCompletion } from 'ai/react';
@@ -22,21 +22,20 @@ import { useTheme } from './components/theme-provider';
 const apiURL = import.meta.env.VITE_BACKEND_URL;
 
 export const App = () => {
-
   const [temperature, setTemperature] = useState(0.5);
-  const [videoId, setVideoId] = useState<string | null >(null);
-   const [uploadButtonClicked, setUploadButtonClicked] = useState(false);
-   const { theme, setTheme } = useTheme();
+  const [videoId, setVideoId] = useState<string | null>(null);
+  const [uploadButtonClicked, setUploadButtonClicked] = useState(false);
+  const { theme, setTheme } = useTheme();
 
-   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
+  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
 
-   const handleClickButton = () => {
-     setUploadButtonClicked(true);
+  const handleClickButton = () => {
+    setUploadButtonClicked(true);
 
-     setTimeout(() => {
-       setUploadButtonClicked(false);
-     }, 5000);
-   };
+    setTimeout(() => {
+      setUploadButtonClicked(false);
+    }, 5000);
+  };
 
   const {
     input,
@@ -85,12 +84,23 @@ export const App = () => {
 
           <HelpArea />
 
-          <Button variant='outline'>
-            <Github className='w-4 h-4 mr-2' />
-            <a href='https://github.com/SilasRodrigues19' target='_blank'>
-              GitHub
-            </a>
-          </Button>
+          <a
+            aria-label='Silas Rodrigues Profile on GitHub'
+            href='https://github.com/SilasRodrigues19'
+            target='_blank'
+            className='flex items-center'
+            rel='noreferrer'
+          >
+            <Button variant='outline'>
+              <span className='flex items-center'>
+                <Github className='w-4 h-4 mr-2' aria-hidden='true' />
+                <span>GitHub</span>
+              </span>
+              <span className='sr-only'>
+                Visit Silas Rodrigues' GitHub Profile
+              </span>
+            </Button>
+          </a>
         </div>
       </div>
       <div className='flex-1 p-6 flex gap-6 flex-col-reverse items-center sm:items-stretch sm:flex-row'>
@@ -192,4 +202,4 @@ export const App = () => {
       </div>
     </main>
   );
-}
+};
